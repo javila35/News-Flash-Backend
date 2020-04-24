@@ -5,7 +5,7 @@ class AuthController < ApplicationController
         user = User.find_by(username: user_name)
         if user && user.authenticate(auth_params["password"])
           token = issue_token(user)
-          render json: {id: user.id, username: user.username, jwt: token}, status: :accepted
+          render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}, status: :accepted
         else
           render json: {error: 'That user could not be found'}, status: 401
         end
