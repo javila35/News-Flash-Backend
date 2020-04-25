@@ -9,3 +9,4 @@
 User.delete_all
 
 User.create(username: "joe", password: "joe", first_name: "Joe", location: "Seattle", twitter: "coderjoe206")
+User.create(username: "user2", password: "123")
