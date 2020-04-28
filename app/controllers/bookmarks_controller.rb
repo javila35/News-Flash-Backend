@@ -6,8 +6,8 @@ class BookmarksController < ApplicationController
         bookmark.article_title = params[:title]
         bookmark.article_link = params[:link]
         bookmark.article_img = params[:img_url]
-        byebug
         bookmark.save
+        render json: bookmark
     end
 
     private
