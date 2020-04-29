@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+    before_action :authorized
+    
     def issue_token(user)
         JWT.encode({user_id: user.id}, 'secret_key', 'HS256')
     end

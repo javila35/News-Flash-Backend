@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_193856) do
+ActiveRecord::Schema.define(version: 2020_04_28_214728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,26 @@ ActiveRecord::Schema.define(version: 2020_04_27_193856) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bookmark_id", null: false
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bookmark_id"], name: "index_comments_on_bookmark_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "comment_id", null: false
+    t.string "reply"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +58,8 @@ ActiveRecord::Schema.define(version: 2020_04_27_193856) do
   end
 
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "comments", "bookmarks"
+  add_foreign_key "comments", "users"
+  add_foreign_key "replies", "comments"
+  add_foreign_key "replies", "users"
 end

@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-
+    skip_before_action :authorized, only: [:create, :show]
     def create
         user = User.new(user_params)
         user.password = params[:password]
         user.save
-        byebug
         render json: user
     end
 
@@ -18,7 +17,8 @@ class UsersController < ApplicationController
             twitter: user.twitter,
             website: user.website,
             bio: user.bio,
-            bookmarks: user.bookmarks
+            bookmarks: user.bookmarks,
+            discussions: user.comments
         };
         render json: returnObject;
     end

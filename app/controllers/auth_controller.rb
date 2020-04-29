@@ -1,13 +1,13 @@
 class AuthController < ApplicationController
+  skip_before_action :authorized, only: [:create]
 
     def create
-        user_name = auth_params[:username].downcase
-        user = User.find_by(username: user_name)
+        user = User.find_by(username: auth_params[:username])
         if user && user.authenticate(auth_params["password"])
           token = issue_token(user)
           render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}, status: :accepted
         else
-          render json: {error: user.errors}, status: 401
+          render json: {error: 'Log in failed.'}, status: 401
         end
       end
     
