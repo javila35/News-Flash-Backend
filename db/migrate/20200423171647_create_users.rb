@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :twitter
       t.string :website
       t.string :bio
+      t.string :user_img
 
       t.timestamps
     end

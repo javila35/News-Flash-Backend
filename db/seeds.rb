@@ -10,4 +10,4 @@ Bookmark.delete_all
 User.delete_all
 
 User.create(username: "joe", password: "joe123456", first_name: "Joe", location: "Seattle", twitter: "coderjoe206")
-User.create(username: "user2", password: "12345678")
+User.create(username: "tyler", password: "12345678", first_name: "Tyler", location: "San Diego")

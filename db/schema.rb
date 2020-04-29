@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_04_28_214728) do
     t.string "twitter"
     t.string "website"
     t.string "bio"
+    t.string "user_img"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

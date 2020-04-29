@@ -4,6 +4,7 @@ Backend for Flatiron School Module 5 project.
 * Ruby version
 
 * System dependencies
+fast_jsonapi
 
 * Configuration
 
