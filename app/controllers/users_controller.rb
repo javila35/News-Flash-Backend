@@ -7,6 +7,12 @@ class UsersController < ApplicationController
         render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}
     end
 
+    def destroy
+        user = User.find(params[:id])
+        User.delete(user)
+        render json: {status: 'success'}
+    end
+
     def show
         user = User.find_by(username: params["id"]);
         if user 
