@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-    
     def create
         user = User.new(user_params)
         user.password = params[:password]
         user.save
-        render json: user
+        token = issue_token(user)
+        render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}
     end
 
     def show
