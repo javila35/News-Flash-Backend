@@ -21,5 +21,5 @@ tb1 = Bookmark.create(user_id: tyler.id, article_title: "Elon Musk Goes Full 'Re
 tb2 = Bookmark.create(user_id: tyler.id, article_title: "iPhone SE review: Small screen, huge performance - Ars Technica", article_link: "https://arstechnica.com/gadgets/2020/04/iphone-se-review-though-it-be-but-little-it-is-fierce/", article_img: "https://cdn.arstechnica.net/wp-content/uploads/2020/04/iPhone-SE-2020-back-760x380.jpeg")
 
 jc1 = Comment.create(user_id: joe.id, bookmark_id: jb1.id, comment: "Interesting.")
-jc2 = Comment.create(user_id: joe.id, bookmark_id: jb2.id, comment: "Ariana Grande.")
-jr1 = Reply.create(user_id: tyler.id, comment_id: jc2, reply: "Love her.")
+jc2 = Comment.create(user_id: joe.id, bookmark_id: jb2.id, comment: "I concur.")
+jr1 = Reply.create(user_id: tyler.id, comment_id: jc2, reply: "Amazing.")
