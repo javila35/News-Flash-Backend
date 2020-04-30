@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create, :show]
     def create
         user = User.new(user_params)
         user.password = params[:password]
@@ -19,8 +18,14 @@ class UsersController < ApplicationController
         end
     end
 
+    def update
+        user = User.find(user_params[:id])
+        user.update(user_params)
+        render json: user
+    end
+
     private
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.require(:user).permit(:username, :password, :id, :first_name, :twitter, :website, :bio, :location)
     end
 end

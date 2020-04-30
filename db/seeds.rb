@@ -11,8 +11,8 @@ Comment.delete_all
 Bookmark.delete_all
 User.delete_all
 
-joe = User.create(username: "joe", password: "joe123456", first_name: "Joe", location: "Seattle", twitter: "coderjoe206")
-tyler = User.create(username: "tyler", password: "12345678", first_name: "Tyler", location: "San Diego")
+joe = User.create(username: "joe", password: "123456789", first_name: "Joe", location: "Seattle", twitter: "coderjoe206")
+tyler = User.create(username: "tyler", password: "123456789", first_name: "Tyler", location: "San Diego")
 
 jb1 = Bookmark.create(user_id: joe.id, article_title: "2020 NFL Draft Grades for Every Team - News Info Park", article_link: "https://newsinfopark.com/sports/2020-04-29/article/2020-nfl-draft-grades-for-every-team-23242/nip-web-desk-team/", article_img: "https://img.bleacherreport.net/img/slides/photos/004/390/547/5791fe028d6b8f79cdd120eed4a90d56_crop_exact.jpg?h=533&w=800&q=70&crop_x=center&crop_y=top")
 jb2 = Bookmark.create(user_id: joe.id, article_title: "Orange County Recovery Task Force Proposes That Walt Disney World Can Open At Their Own Discretion - wdwnt.com", article_link: "https://wdwnt.com/2020/04/orange-county-recovery-task-force-proposes-that-walt-disney-world-can-open-at-their-own-discretion/" , article_img: "https://wdwnt-buzzy.s3.amazonaws.com/2020/04/magic-kingdom-main-street-closure-cinderella-castle.jpg")
