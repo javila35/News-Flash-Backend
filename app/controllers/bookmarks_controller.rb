@@ -11,9 +11,14 @@ class BookmarksController < ApplicationController
     end
 
     # Working on showing bookmark with comment.
-    # def show 
-    #     bookmark = Bookmark.find(bookmark_params[:id])
-    # end
+    def show 
+        bookmark = Bookmark.find(params[:id])
+        comments = Comment.all.filter{|c| c.bookmark_id == bookmark.id}
+        # replies = Reply.find_by(bookmark_id: bookmark.id)
+        # currently rendering through comments of bookmarks, but i also need to render through comments for replies.
+        byebug 
+        # render json: bookmark;
+    end
 
     private
     def bookmark_params
