@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-    
     def issue_token(user)
         JWT.encode({user_id: user.id}, Rails.application.secret_key_base, 'HS256')
     end

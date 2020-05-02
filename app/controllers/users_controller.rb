@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
     def create
-        user = User.new(user_params)
-        user.password = params[:password]
-        user.save
-        token = issue_token(user)
-        render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}
+        # byebug
+        user = User.create(user_params)
+        if user.valid? 
+            token = issue_token(user)
+            render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}
+        else
+            render json: { errors: user.errors.full_messages }
+        end
     end
 
     def destroy

@@ -10,8 +10,13 @@ class BookmarksController < ApplicationController
         render json: bookmark
     end
 
+    # Working on showing bookmark with comment.
+    # def show 
+    #     bookmark = Bookmark.find(bookmark_params[:id])
+    # end
+
     private
     def bookmark_params
-        params.require(:bookmarks).permit(:user,:title,:link,:img_url)
+        params.require(:bookmarks).permit(:id, :user,:title,:link,:img_url)
     end
 end

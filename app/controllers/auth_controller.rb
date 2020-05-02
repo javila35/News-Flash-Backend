@@ -1,5 +1,4 @@
 class AuthController < ApplicationController
-
     def create
         user = User.find_by(username: auth_params[:username])
         if user && user.authenticate(auth_params["password"])
