@@ -21,10 +21,10 @@ class UsersController < ApplicationController
         if user 
             options = {
                 include: [:bookmarks, :comments, :replies]
-            };
+            }
             render json: UserSerializer.new(user, options)
         else
-            render json: { errors: 'User not found' }
+            render json: { errors: 'User not found.' }
         end
     end
 

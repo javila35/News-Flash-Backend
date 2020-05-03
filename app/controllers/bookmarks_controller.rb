@@ -13,11 +13,14 @@ class BookmarksController < ApplicationController
     # Working on showing bookmark with comment.
     def show 
         bookmark = Bookmark.find(params[:id])
-        comments = Comment.all.filter{|c| c.bookmark_id == bookmark.id}
-        # replies = Reply.find_by(bookmark_id: bookmark.id)
-        # currently rendering through comments of bookmarks, but i also need to render through comments for replies.
-        byebug 
-        # render json: bookmark;
+        options = {
+            include: [:comments, :replies]
+        }
+        if bookmark
+            render json: BookmarkSerializer.new(bookmark, options)
+        else
+            render json: { errors: 'Bookmark not found.'}
+        end
     end
 
     private
