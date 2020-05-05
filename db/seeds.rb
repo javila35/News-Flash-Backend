@@ -20,6 +20,6 @@ jb2 = Bookmark.create(user_id: joe.id, article_title: "Orange County Recovery Ta
 tb1 = Bookmark.create(user_id: tyler.id, article_title: "Elon Musk Goes Full 'Reopen America' Truther Ahead of Crucial Tesla Q1 Earnings Call - The Drive", article_link: "https://www.thedrive.com/news/33219/elon-musk-goes-full-reopen-america-truther-ahead-of-crucial-tesla-q1-earnings-call", article_img: "https://api.thedrive.com/wp-content/uploads/2020/04/AP_19327815401015.jpg?quality=85")
 tb2 = Bookmark.create(user_id: tyler.id, article_title: "iPhone SE review: Small screen, huge performance - Ars Technica", article_link: "https://arstechnica.com/gadgets/2020/04/iphone-se-review-though-it-be-but-little-it-is-fierce/", article_img: "https://cdn.arstechnica.net/wp-content/uploads/2020/04/iPhone-SE-2020-back-760x380.jpeg")
 
-jc1 = Comment.create(user_id: joe.id, bookmark_id: jb1.id, comment: "Interesting.")
-jc2 = Comment.create(user_id: joe.id, bookmark_id: jb2.id, comment: "I concur.")
-jr1 = Reply.create(user_id: tyler.id, comment_id: jc2, reply: "Amazing.")
+jc1 = Comment.create(user_id: joe.id, bookmark_id: jb1.id, comment_text: "Interesting.")
+jc2 = Comment.create(user_id: joe.id, bookmark_id: jb2.id, comment_text: "I concur.")
+jr1 = Reply.create(user_id: tyler.id, comment_id: jc2.id, reply: "Amazing.")

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_04_28_214728) do
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "bookmark_id", null: false
-    t.string "comment"
+    t.string "comment_text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bookmark_id"], name: "index_comments_on_bookmark_id"
