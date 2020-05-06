@@ -3,7 +3,13 @@ class UsersController < ApplicationController
         user = User.create(user_params)
         if user.valid? 
             token = issue_token(user)
-            render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location}, jwt: token}
+            render json: {
+                user: {
+                    id: user.id, 
+                    username: user.username, 
+                    first_name: user.first_name, 
+                    location: user.location
+                }, jwt: token}
         else
             render json: { errors: user.errors.full_messages }
         end
@@ -17,7 +23,11 @@ class UsersController < ApplicationController
 
     def index
         users = User.all
-        render json: users
+        array = []
+        users.map do |user|
+            array << user.username
+        end
+        render json: array
     end
 
     def show
