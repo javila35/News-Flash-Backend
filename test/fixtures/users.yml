@@ -4,12 +4,8 @@ one:
   username: MyString
   first_name: MyString
   location: MyString
-  twitter: MyString
-  website: MyString
 
 two:
   username: MyString
   first_name: MyString
   location: MyString
-  twitter: MyString
-  website: MyString

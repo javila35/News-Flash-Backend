@@ -3,5 +3,4 @@ class BookmarkSerializer
   attributes :article_img, :article_link, :article_title
   belongs_to :user
   has_many :comments
-  has_many :replies
 end

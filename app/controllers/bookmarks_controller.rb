@@ -14,7 +14,7 @@ class BookmarksController < ApplicationController
     def show 
         bookmark = Bookmark.find(params[:id])
         options = {
-            include: [:comments, :replies]
+            include: [:comments]
         }
         if bookmark
             render json: BookmarkSerializer.new(bookmark, options)

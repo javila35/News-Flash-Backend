@@ -1,17 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-Reply.delete_all
 Comment.delete_all
 Bookmark.delete_all
 User.delete_all
 
-joe = User.create(username: "joe", password: "123456789", first_name: "Joe", location: "Seattle", twitter: "coderjoe206")
+joe = User.create(username: "joe", password: "123456789", first_name: "Joe", location: "Seattle")
 tyler = User.create(username: "tyler", password: "123456789", first_name: "Tyler", location: "San Diego")
 
 jb1 = Bookmark.create(user_id: joe.id, article_title: "2020 NFL Draft Grades for Every Team - News Info Park", article_link: "https://newsinfopark.com/sports/2020-04-29/article/2020-nfl-draft-grades-for-every-team-23242/nip-web-desk-team/", article_img: "https://img.bleacherreport.net/img/slides/photos/004/390/547/5791fe028d6b8f79cdd120eed4a90d56_crop_exact.jpg?h=533&w=800&q=70&crop_x=center&crop_y=top")
@@ -22,4 +13,24 @@ tb2 = Bookmark.create(user_id: tyler.id, article_title: "iPhone SE review: Small
 
 jc1 = Comment.create(user_id: joe.id, bookmark_id: jb1.id, comment_text: "Interesting.")
 jc2 = Comment.create(user_id: joe.id, bookmark_id: jb2.id, comment_text: "I concur.")
-jr1 = Reply.create(user_id: tyler.id, comment_id: jc2.id, reply: "Amazing.")
+
+5.times { |i|
+    user = User.create(
+        username: "user#{i}",
+        password: '123',
+        first_name: Faker::TvShows::TwinPeaks.character,
+        location: Faker::TvShows::TwinPeaks.location,
+        bio: Faker::Hipster.paragraph(sentence_count: 3)
+    )
+    bm = Bookmark.create(
+        user_id: user.id, 
+        article_title: "2020 NFL Draft Grades for Every Team - News Info Park", 
+        article_link: "https://newsinfopark.com/sports/2020-04-29/article/2020-nfl-draft-grades-for-every-team-23242/nip-web-desk-team/", 
+        article_img: "https://img.bleacherreport.net/img/slides/photos/004/390/547/5791fe028d6b8f79cdd120eed4a90d56_crop_exact.jpg?h=533&w=800&q=70&crop_x=center&crop_y=top"
+    )
+    Comment.create(
+        user_id: user.id,
+        bookmark_id: bm.id,
+        comment_text: Faker::Hipster.sentence
+    )
+}

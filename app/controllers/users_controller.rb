@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
     def create
-        # byebug
         user = User.create(user_params)
         if user.valid? 
             token = issue_token(user)
-            render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location, twitter: user.twitter, website: user.website}, jwt: token}
+            render json: {user: {id: user.id, username: user.username, first_name: user.first_name, location: user.location}, jwt: token}
         else
             render json: { errors: user.errors.full_messages }
         end
@@ -16,11 +15,16 @@ class UsersController < ApplicationController
         render json: {status: 'success'}
     end
 
+    def index
+        users = User.all
+        render json: users
+    end
+
     def show
         user = User.find_by(username: params["id"]);
         if user 
             options = {
-                include: [:bookmarks, :comments, :replies]
+                include: [:bookmarks, :comments]
             }
             render json: UserSerializer.new(user, options)
         else
@@ -36,6 +40,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:username, :password, :id, :first_name, :twitter, :website, :bio, :location)
+        params.require(:user).permit(:username, :password, :id, :first_name, :bio, :location)
     end
 end
