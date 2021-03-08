@@ -9,7 +9,9 @@ class UsersController < ApplicationController
                     username: user.username, 
                     first_name: user.first_name, 
                     location: user.location
-                }, jwt: token}
+                },
+                jwt: token
+            }
         else
             render json: { errors: user.errors.full_messages }
         end
