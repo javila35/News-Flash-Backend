@@ -33,12 +33,9 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find_by(username: params["id"]);
-        if user 
-            options = {
-                include: [:bookmarks, :comments]
-            }
-            render json: UserSerializer.new(user, options)
+        user = User.find(params[:id])
+        if user
+            render json: UserSerializer.new(user)
         else
             render json: { errors: 'User not found.' }
         end
@@ -47,11 +44,17 @@ class UsersController < ApplicationController
     def update
         user = User.find(user_params[:id])
         user.update(user_params)
-        render json: user
+        user.save
+        if user
+            updatedUser = user.slice(:username, :id, :first_name, :bio, :location)
+            render json: updatedUser
+        else 
+            render json: { errors: user.errors.full_messages }
+        end
     end
 
     private
     def user_params
-        params.require(:user).permit(:username, :password, :id, :first_name, :bio, :location)
+        params.permit(:username, :password, :id, :first_name, :bio, :location)
     end
 end

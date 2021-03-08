@@ -5,7 +5,7 @@ This database provides endpoints and stores information for authentication, user
 
 ## Endpoints
 ### Auth
-* Create: 
+* Create: POST /auth
     * Creates a new authenticated session.
     * Params
         * `username: string`
@@ -30,10 +30,13 @@ This database provides endpoints and stores information for authentication, user
 ```
 
 ### Bookmarks
-* Create
+* Create: POST /bookmarks
     * Creates a new user bookmark
     * Params
-        * `user_id: number`
+        * `user_id: number` # User to associate created
+        * `title: string`: # Title / Headline for the article
+        * `link: string`: # Link to the article for anchor href attribute
+        * `img_url: string`: # Link to image for img src attribute
     * Returns json bookmark
 ```ruby
     {
@@ -46,22 +49,41 @@ This database provides endpoints and stores information for authentication, user
     }
 ```
 
-* Show
-TODO: 
-- [ ] Type return object
+* Show: GET	/bookmarks/:id
     * Retrieve a bookmark and it's comments
     * Params
-        * `bookmark_id: number`
-    * Returns json bookmark and comments* 
+        * `id: number`
+    * Returns serialized json bookmark and comments* 
 ```ruby
+    {
+        # Bookmark id
+        id: number
+        attributes: {
+            # Link for article image
+            article_img: string
+            # Link for published article
+            article_link: string
+            # Headline of article
+            article_title: string
+            # Array of comment objects
+            comments: Comment[]
+        }
 
+    Comment = {
+        # Comment record id
+        id: number
+        # User the comment belongs to
+        user_id: number
+        # Bookmark the comment belongs to
+        bookmark_id: number
+        # Text to display
+        comment_text: string
+    }
+    }
 ```
 
 ### Comments
-TODO:
-- [ ] Type return object
-- [ ] Are replies being displayed?
-* Create
+* Create: POST /comments
     * Creates a comment on a bookmark
     * Params
         * `user_id: number`
@@ -69,17 +91,24 @@ TODO:
         * `comment_text: string`
     * Returns json comment and replies(?)
 ```ruby
-
+    {
+        # Comment id
+        id: number
+        # User the comment belongs to
+        user_id: number
+        # Bookmark the comment belongs to
+        bookmark_id: number
+        # Text to display
+        comment_text: string
+    }
 ```
 
 ### Users
-* Create
+* Create: POST	/users
     * Creates a new user
     * Params
-        * `id: number`
         * `username: string`
-        * `first_name: string`
-        * `location: string`
+        * `password: string`
     * Returns a json user & jwt token
 ```ruby
     {
@@ -97,35 +126,54 @@ TODO:
     }
 ```
 
-* Destroy
+* Destroy: DELETE	/users/:id
     * Deletes a user record
     * Params
-        * `user_id: number`
+        * `id: number`
     * Returns json status
 ```ruby
     status: string
 ```
 
-* Index
+* Index: 	GET	/users
     * Returns a username for each user record
 ```ruby
     string[]
 ```
 
-* Show
-- [ ] Type the return object
+* Show: GET	/users/:id
     * Retrieve an individual user
     * Params
-        * `user_id: number`
+        * `id: number`
     * Returns user record and serialized bookmarks and comments
 ```ruby
+    {
+        data: {
+            id: number,
+            type: "user",
+            attributes: {
+                username: string
+                first_name: string
+                location: string
+                bio: string
+                bookmarks: Bookmark # See Bookmark endpoint for typing
+            }
+        }
+    }
 ```
 
-* Update
-- [ ] Type the return object
+* Update: PATCH /users/:id
     * Edit a user record
     * Params
-        * `user_id: number`
+        * `id: number`
+        * User Property to update. Examples: `username: string`, `bio: string`, etc
     * Returns updated json user
 ```ruby
+{
+    username: string
+    id: number
+    first_name: string
+    bio: string
+    location: string
+}
 ```
