@@ -1,6 +1,8 @@
 class BookmarksController < ApplicationController
     def create
-        user = User.find(params[:user][:user][:id])
+        # TODO: Make this method less nested, only one :user deep
+        # user = User.find(params[:user][:user][:id])
+        user = User.find(params[:user_id])
         bookmark = Bookmark.new
         bookmark.user = user
         bookmark.article_title = params[:title]
@@ -13,11 +15,8 @@ class BookmarksController < ApplicationController
     # Working on showing bookmark with comment.
     def show 
         bookmark = Bookmark.find(params[:id])
-        options = {
-            include: [:comments]
-        }
         if bookmark
-            render json: BookmarkSerializer.new(bookmark, options)
+            render json: BookmarkSerializer.new(bookmark)
         else
             render json: { errors: 'Bookmark not found.'}
         end
