@@ -141,10 +141,10 @@ This database provides endpoints and stores information for authentication, user
     string[]
 ```
 
-* Show: GET	/users/:id
+* Show: GET	/users/:username
     * Retrieve an individual user
     * Params
-        * `id: number`
+        * `username: string`
     * Returns user record and serialized bookmarks and comments
 ```ruby
     {
