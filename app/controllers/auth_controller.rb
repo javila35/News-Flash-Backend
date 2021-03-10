@@ -9,10 +9,11 @@ class AuthController < ApplicationController
               first_name: user.first_name, 
               bio: user.bio, 
               location: user.location,
-              jwt: token
+              jwt: token,
+              status: 202
           }
         else
-          render json: {error: 'Log in failed.'}, status: 401
+          render json: {error: 'Log in failed.', status: 401}
         end
       end
 
