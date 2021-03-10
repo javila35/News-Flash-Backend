@@ -3,6 +3,10 @@ Backend for a [news aggregator site](https://github.com/javila35/News-Flash-Fron
 
 This database provides endpoints and stores information for authentication, users,  user comments, and bookmarks.
 
+TODO:
+- [ ] Handle case sensitivity for account creation
+- [ ] Handle case sensitivity for auth creation
+
 ## Endpoints
 ### Auth
 * Create: POST /auth
