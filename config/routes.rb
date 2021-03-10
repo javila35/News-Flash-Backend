@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  resources :comments do
-    end
+  resources :comments
   resources :bookmarks
-  resources :users
+  resources :users, param: :username
   post '/auth', to: "auth#create"
   get '/current_user', to: 'auth#show'
 end
