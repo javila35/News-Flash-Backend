@@ -23,17 +23,32 @@ class AuthController < ApplicationController
       end
 
       def show
+        # Get token from request
+        token = request.authorization
+
+        # Decode token
+        response  = JWT.decode(token, Rails.application.secret_key_base, true, { :algorithm => 'HS256' })
+
+        # Destructuring decoded token
+        user_id = response[0]["user_id"]
+
         user = User.find(user_id)
-        if logged_in?
+        if user
           render json: {
-            id: user.id, 
-            username: user.username, 
-            first_name: user.first_name, 
-            bio: user.bio, 
-            location: user.location
+            user: {
+              id: user.id,
+              username: user.username,
+              first_name: user.first_name,
+              bio: user.bio,
+              location: user.location,
+            },
+            status: 200
         }
         else
-          render json: {error: 'No user could be found', status: 401}
+          render json: {
+            error: "Token could not be decoded.",
+            status: 401
+          }
         end
       end
 

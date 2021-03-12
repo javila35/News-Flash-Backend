@@ -48,9 +48,15 @@ class UsersController < ApplicationController
         user.save
         if user
             updatedUser = user.slice(:username, :id, :first_name, :bio, :location)
-            render json: updatedUser
+            render json: {
+                user: updatedUser,
+                status: 200
+            }
         else 
-            render json: { errors: user.errors.full_messages }
+            render json: {
+                    errors: "User not updated.",
+                    status: 406
+                }
         end
     end
 
