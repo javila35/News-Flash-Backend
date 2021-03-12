@@ -4,16 +4,21 @@ class AuthController < ApplicationController
         if user && user.authenticate(auth_params["password"])
           token = issue_token(user)
           render json: {
+            user: {
               id: user.id, 
               username: user.username, 
               first_name: user.first_name, 
               bio: user.bio, 
               location: user.location,
+            },
               jwt: token,
               status: 202
           }
         else
-          render json: {error: 'Log in failed.', status: 401}
+          render json: {
+            response: 'Log in failed.', 
+            status: 401
+          }
         end
       end
 
@@ -28,7 +33,7 @@ class AuthController < ApplicationController
             location: user.location
         }
         else
-          render json: {error: 'No user could be found'}, status: 401
+          render json: {error: 'No user could be found', status: 401}
         end
       end
 
