@@ -3,15 +3,13 @@ class AuthController < ApplicationController
     user = User.find_by(username: auth_params[:username])
     if !user
       render json: {
-               error: "Could not find username.",
+               message: "Could not find username.",
                status: 401,
              }
       return
     elsif user && !user.authenticate(auth_params[:password])
-      render json: {
-               error: "Incorrect password",
-               status: 401,
-             }
+      render json: { message: "Incorrect password." }, :status => :unauthorized
+      return
     elsif user && user.authenticate(auth_params[:password])
       token = issue_token(user)
       render json: {
@@ -28,7 +26,7 @@ class AuthController < ApplicationController
       return
     else
       render json: {
-        error: "Unknown error.",
+        message: "Unknown error.",
         status: 401,
       }
       return

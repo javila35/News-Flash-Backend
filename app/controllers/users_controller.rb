@@ -14,7 +14,7 @@ class UsersController < ApplicationController
                status: 201,
              }
     else
-      render json: { errors: user.errors.full_messages, status: 500 }
+      render json: { message: user.errors.full_messages[0], status: 401 }
     end
   end
 
