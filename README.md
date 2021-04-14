@@ -1,20 +1,25 @@
 # News-Flash-Backend
+
 Backend for a [news aggregator site](https://github.com/javila35/News-Flash-Frontend) project by [Joe Avila](https://github.com/javila35).
 
-This database provides endpoints and stores information for authentication, users,  user comments, and bookmarks.
+This database provides endpoints and stores information for authentication, users, user comments, and bookmarks.
 
 TODO:
+
 - [ ] Handle case sensitivity for account creation
 - [ ] Handle case sensitivity for auth creation
 
 ## Endpoints
+
 ### Auth
-* Create: POST /auth
-    * Creates a new authenticated session.
-    * Params
-        * `username: string`
-        * `password: string`
-    * Returns json user & token
+
+- Create: POST /auth
+  - Creates a new authenticated session.
+  - Params
+    - `username: string`
+    - `password: string`
+  - Returns json user & token
+
 ```ruby
     {
         user: {
@@ -34,14 +39,16 @@ TODO:
 ```
 
 ### Bookmarks
-* Create: POST /bookmarks
-    * Creates a new user bookmark
-    * Params
-        * `user_id: number` # User to associate created
-        * `title: string`: # Title / Headline for the article
-        * `link: string`: # Link to the article for anchor href attribute
-        * `img_url: string`: # Link to image for img src attribute
-    * Returns json bookmark
+
+- Create: POST /bookmarks
+  - Creates a new user bookmark
+  - Params
+    - `user_id: number` # User to associate created
+    - `title: string`: # Title / Headline for the article
+    - `link: string`: # Link to the article for anchor href attribute
+    - `img_url: string`: # Link to image for img src attribute
+  - Returns json bookmark
+
 ```ruby
     {
         # Link to image for img src attribute
@@ -49,15 +56,16 @@ TODO:
         # Title / Headline for the article
         article_title: string
         # Link to the article for anchor href attribute
-        article_link: string        
+        article_link: string
     }
 ```
 
-* Show: GET	/bookmarks/:id
-    * Retrieve a bookmark and it's comments
-    * Params
-        * `id: number`
-    * Returns serialized json bookmark and comments* 
+- Show: GET /bookmarks/:id
+  - Retrieve a bookmark and it's comments
+  - Params
+    - `id: number`
+  - Returns serialized json bookmark and comments\*
+
 ```ruby
     {
         # Bookmark id
@@ -87,13 +95,15 @@ TODO:
 ```
 
 ### Comments
-* Create: POST /comments
-    * Creates a comment on a bookmark
-    * Params
-        * `user_id: number`
-        * `bookmark_id: number`
-        * `comment_text: string`
-    * Returns json comment and replies(?)
+
+- Create: POST /comments
+  - Creates a comment on a bookmark
+  - Params
+    - `user_id: number`
+    - `bookmark_id: number`
+    - `comment_text: string`
+  - Returns json comment and replies(?)
+
 ```ruby
     {
         # Comment id
@@ -108,12 +118,14 @@ TODO:
 ```
 
 ### Users
-* Create: POST	/users
-    * Creates a new user
-    * Params
-        * `username: string`
-        * `password: string`
-    * Returns a json user & jwt token
+
+- Create: POST /users
+  - Creates a new user
+  - Params
+    - `username: string`
+    - `password: string`
+  - Returns a json user & jwt token
+
 ```ruby
     {
         user: {
@@ -130,26 +142,29 @@ TODO:
     }
 ```
 
-* Destroy: DELETE	/users/:id
-    * Deletes a user record
-    * Params
-        * `id: number`
-    * Returns json status
+- Destroy: DELETE /users/:id
+  - Deletes a user record
+  - Params
+    - `id: number`
+  - Returns json status
+
 ```ruby
     status: string
 ```
 
-* Index: 	GET	/users
-    * Returns a username for each user record
+- Index: GET /users
+  - Returns a username for each user record
+
 ```ruby
     string[]
 ```
 
-* Show: GET	/users/:username
-    * Retrieve an individual user
-    * Params
-        * `username: string`
-    * Returns user record and serialized bookmarks and comments
+- Show: GET /users/:username
+  - Retrieve an individual user
+  - Params
+    - `username: string`
+  - Returns user record and serialized bookmarks and comments
+
 ```ruby
     {
         data: {
@@ -166,12 +181,13 @@ TODO:
     }
 ```
 
-* Update: PATCH /users/:id
-    * Edit a user record
-    * Params
-        * `id: number`
-        * User Property to update. Examples: `username: string`, `bio: string`, etc
-    * Returns updated json user
+- Update: PATCH /users/:id
+  - Edit a user record
+  - Params
+    - `id: number`
+    - User Property to update. Examples: `username: string`, `bio: string`, etc
+  - Returns updated json user
+
 ```ruby
 {
     username: string
