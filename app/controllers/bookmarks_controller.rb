@@ -2,12 +2,12 @@ class BookmarksController < ApplicationController
   def create
     # TODO: Make this method less nested, only one :user deep
     # user = User.find(params[:user][:user][:id])
-    user = User.find(params[:user_id])
+    user = User.find(params[:userId])
     bookmark = Bookmark.new
     bookmark.user = user
-    bookmark.article_title = params[:title]
-    bookmark.article_link = params[:link]
-    bookmark.article_img = params[:img_url]
+    bookmark.article_title = params[:articleTitle]
+    bookmark.article_link = params[:articleLink]
+    bookmark.article_img = params[:imgUrl]
     bookmark.save
     render json: bookmark
   end
